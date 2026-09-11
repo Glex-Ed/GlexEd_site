@@ -21,36 +21,60 @@ export function AnimatedCounter({ value, duration = 1.6, className }: Props) {
 
   // Find the first numeric run (supports "2.900", "9.2", "92")
   const match = value.match(/(\d[\d.,]*)/);
+  const hasMatch = Boolean(match);
   const numericStr = match?.[0] ?? "";
   const start = match?.index ?? 0;
   const end = start + numericStr.length;
   const prefix = value.slice(0, start);
   const suffix = value.slice(end);
 
-  // Determine separators by looking at the source string
+  // Treat a single separator followed by three digits as a thousands separator,
+  // so both Spanish "2.900" and English "2,900" animate to 2900.
   const hasDot = numericStr.includes(".");
   const hasComma = numericStr.includes(",");
-  // If both, assume "." is thousands and "," is decimal (es-AR style is opposite,
-  // but project values like "2.900" use "." as thousands separator).
-  const decimalSep = hasComma ? "," : hasDot && /\.\d{1,2}$/.test(numericStr) ? "." : "";
-  const thousandsSep = decimalSep === "," ? "." : decimalSep === "." ? "," : ".";
-
-  const target = parseFloat(
-    numericStr.replace(thousandsSep === "." ? /\./g : /,/g, "").replace(",", "."),
-  );
+  const hasBothSeparators = hasDot && hasComma;
+  const singleSeparator = hasDot ? "." : hasComma ? "," : "";
+  const singleSeparatorParts = singleSeparator ? numericStr.split(singleSeparator) : [];
+  const isSingleThousandsValue =
+    !hasBothSeparators &&
+    Boolean(singleSeparator) &&
+    singleSeparatorParts.length === 2 &&
+    singleSeparatorParts[1].length === 3;
+  const decimalSep = hasBothSeparators
+    ? numericStr.lastIndexOf(".") > numericStr.lastIndexOf(",")
+      ? "."
+      : ","
+    : isSingleThousandsValue
+      ? ""
+      : singleSeparator;
+  const thousandsSep = hasBothSeparators
+    ? decimalSep === "."
+      ? ","
+      : "."
+    : isSingleThousandsValue
+      ? singleSeparator
+      : "";
+  const normalizedNumericStr = numericStr
+    .replace(thousandsSep ? new RegExp(`\\${thousandsSep}`, "g") : /$^/g, "")
+    .replace(decimalSep || /$^/g, ".");
+  const target = parseFloat(normalizedNumericStr);
   const decimals = decimalSep && numericStr.split(decimalSep)[1]
     ? numericStr.split(decimalSep)[1].length
     : 0;
 
-  const [display, setDisplay] = useState(reduce || !match ? numericStr : "0");
+  const [display, setDisplay] = useState(reduce || !hasMatch ? numericStr : "0");
 
   useEffect(() => {
-    if (reduce || !match) {
+    if (reduce || !hasMatch) {
       setDisplay(numericStr);
       return;
     }
-    if (!inView) return;
+    if (!inView) {
+      setDisplay("0");
+      return;
+    }
 
+    setDisplay("0");
     const controls = animate(0, target, {
       duration,
       ease: [0.16, 1, 0.3, 1],
@@ -62,8 +86,7 @@ export function AnimatedCounter({ value, duration = 1.6, className }: Props) {
       },
     });
     return () => controls.stop();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView]);
+  }, [decimalSep, duration, hasMatch, inView, numericStr, reduce, target, thousandsSep, value]);
 
   return (
     <span ref={ref} className={className}>
