@@ -1,0 +1,366 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Glex Ed 2026 — design system
+ * Brandbook oficial: navy (#1b2d6a) + magenta (#8e2684) + 4 brand petals
+ * Tipografía: Montserrat (Black para títulos, Regular/Medium para cuerpo)
+ */
+
+@theme inline {
+  --font-sans: "Montserrat", system-ui, -apple-system, sans-serif;
+  --font-display: "Montserrat", system-ui, -apple-system, sans-serif;
+  --font-serif: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
+  --font-brand: "Montserrat", system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-cream: var(--surface-cream);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-google-blue: var(--google-blue);
+  --color-google-red: var(--google-red);
+  --color-google-yellow: var(--google-yellow);
+  --color-google-green: var(--google-green);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-gray: var(--brand-gray);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-magenta: var(--brand-magenta);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-red: var(--brand-red);
+  --color-brand-green: var(--brand-green);
+  --color-brand-indigo: var(--brand-indigo);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-soft: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 24px oklch(0 0 0 / 0.06);
+  --shadow-glow-magenta: 0 12px 40px -12px oklch(0.44 0.18 335 / 0.45);
+  --shadow-glow-navy: 0 12px 40px -12px oklch(0.27 0.13 268 / 0.45);
+
+  --gradient-brand: linear-gradient(
+    135deg,
+    var(--brand-navy) 0%,
+    var(--brand-magenta) 100%
+  );
+  --gradient-petals: linear-gradient(
+    90deg,
+    var(--brand-magenta) 0%,
+    var(--brand-red) 20%,
+    var(--brand-orange) 40%,
+    var(--brand-yellow) 60%,
+    var(--brand-green) 80%,
+    var(--brand-navy) 100%
+  );
+  --gradient-google: var(--gradient-petals);
+
+  /* Edtech soft gradients (Instagram brand style) */
+  --gradient-lavender: linear-gradient(135deg, oklch(0.985 0.012 230) 0%, oklch(0.93 0.045 240) 45%, oklch(0.88 0.07 275) 100%);
+  --gradient-sky: linear-gradient(135deg, oklch(0.96 0.04 230) 0%, oklch(0.97 0.03 320) 50%, oklch(0.96 0.035 350) 100%);
+  --gradient-cream: linear-gradient(135deg, oklch(0.98 0.02 80) 0%, oklch(0.96 0.04 30) 100%);
+  --gradient-mint: linear-gradient(135deg, oklch(0.975 0.02 170) 0%, oklch(0.955 0.04 165) 55%, oklch(0.94 0.05 175) 100%);
+  --gradient-violet-soft: linear-gradient(135deg, oklch(0.55 0.22 295) 0%, oklch(0.65 0.20 320) 55%, oklch(0.78 0.13 340) 100%);
+  --gradient-violet-vivid: linear-gradient(140deg, oklch(0.45 0.25 295) 0%, oklch(0.55 0.24 320) 100%);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Soft cream-lavender base, edtech feel */
+  --background: oklch(0.985 0.012 320);
+  --foreground: oklch(0.20 0.05 268);
+  --surface: oklch(1 0 0);
+  --surface-cream: oklch(0.965 0.012 75);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.20 0.05 268);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.20 0.05 268);
+
+  /* GLEX brand palette (brandbook) */
+  --brand-navy:    oklch(0.27 0.13 268); /* #1b2d6a */
+  --brand-magenta: oklch(0.376 0.158 322); /* #792980 — violeta oscuro del isologo */
+  --brand-red:     oklch(0.62 0.24 28);  /* #fb2320 */
+  --brand-orange:  oklch(0.72 0.19 55);  /* #fb8505 */
+  --brand-yellow:  oklch(0.88 0.17 92);  /* #fbd830 */
+  --brand-green:   oklch(0.62 0.20 145); /* #06ad3d */
+
+  /* Aliases (back-compat with existing classes) */
+  --brand-purple:  var(--brand-magenta);
+  --brand-indigo:  var(--brand-navy);
+  --brand-dark:    var(--brand-navy);
+  --brand-gray:    oklch(0.46 0.018 268);
+
+  /* Legacy google-* tokens repointed to brand palette so existing components
+     adopt the brandbook automatically */
+  --google-blue:   var(--brand-navy);
+  --google-red:    var(--brand-red);
+  --google-yellow: var(--brand-yellow);
+  --google-green:  var(--brand-green);
+
+  /* Brand navy as primary */
+  --primary: var(--brand-navy);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.965 0.008 268);
+  --secondary-foreground: oklch(0.20 0.05 268);
+  --muted: oklch(0.965 0.008 268);
+  --muted-foreground: oklch(0.46 0.018 268);
+  --accent: oklch(0.965 0.012 335);
+  --accent-foreground: var(--brand-magenta);
+
+  --destructive: var(--brand-red);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.92 0.01 268);
+  --input: oklch(0.92 0.01 268);
+  --ring: var(--brand-magenta);
+
+  --chart-1: var(--brand-navy);
+  --chart-2: var(--brand-magenta);
+  --chart-3: var(--brand-orange);
+  --chart-4: var(--brand-green);
+  --chart-5: var(--brand-yellow);
+
+  --sidebar: oklch(0.985 0.004 80);
+  --sidebar-foreground: oklch(0.20 0.05 268);
+  --sidebar-primary: var(--brand-navy);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.965 0.008 268);
+  --sidebar-accent-foreground: oklch(0.20 0.05 268);
+  --sidebar-border: oklch(0.92 0.01 268);
+  --sidebar-ring: var(--brand-magenta);
+}
+
+.dark {
+  --background: oklch(0.16 0.04 268);
+  --foreground: oklch(0.98 0.003 247);
+  --surface: oklch(0.22 0.05 268);
+  --surface-cream: oklch(0.22 0.05 268);
+  --card: oklch(0.22 0.05 268);
+  --card-foreground: oklch(0.98 0.003 247);
+  --popover: oklch(0.22 0.05 268);
+  --popover-foreground: oklch(0.98 0.003 247);
+  --primary: oklch(0.7 0.16 335);
+  --primary-foreground: oklch(0.16 0.04 268);
+  --secondary: oklch(0.28 0.04 268);
+  --secondary-foreground: oklch(0.98 0.003 247);
+  --muted: oklch(0.28 0.04 268);
+  --muted-foreground: oklch(0.7 0.018 268);
+  --accent: oklch(0.28 0.04 268);
+  --accent-foreground: oklch(0.98 0.003 247);
+  --destructive: oklch(0.7 0.19 22);
+  --destructive-foreground: oklch(0.98 0.003 247);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.7 0.16 335);
+  --brand-dark: oklch(0.98 0.003 247);
+  --brand-gray: oklch(0.7 0.018 268);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: oklch(from var(--brand-magenta) l c h / 0.22);
+    color: var(--brand-navy);
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  .bg-google-gradient {
+    background-image: var(--gradient-petals);
+  }
+
+  .bg-brand-gradient {
+    background-image: var(--gradient-brand);
+  }
+
+  .text-brand-gradient {
+    background-image: var(--gradient-brand);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .container-page {
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-page { padding-inline: 1.5rem; }
+  }
+  body { overflow-x: hidden; }
+
+  /* Hexagon-rounded "petal" frame inspired by the GLEX isotype */
+  .clip-petal {
+    border-radius: 38% 62% 55% 45% / 45% 55% 42% 58%;
+  }
+  .clip-petal-alt {
+    border-radius: 62% 38% 45% 55% / 55% 45% 58% 42%;
+  }
+
+  /* Outline (text-stroke) numerals for process steps */
+  .text-outline-navy {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--brand-navy);
+  }
+  .text-outline-magenta {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--brand-magenta);
+  }
+
+  .font-serif { font-family: var(--font-serif); }
+
+  .bg-gradient-lavender { background-image: var(--gradient-lavender); }
+  .bg-gradient-sky { background-image: var(--gradient-sky); }
+  .bg-gradient-cream { background-image: var(--gradient-cream); }
+  .bg-gradient-mint { background-image: var(--gradient-mint); }
+  .bg-gradient-violet-soft { background-image: var(--gradient-violet-soft); }
+  .bg-gradient-violet-vivid { background-image: var(--gradient-violet-vivid); }
+
+  .text-violet-gradient {
+    background-image: var(--gradient-violet-vivid);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Yellow highlighter underline (Instagram "primaria" style) */
+  .underline-yellow {
+    background-image: linear-gradient(transparent 68%, oklch(0.88 0.17 92 / 0.7) 68%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 0 0.1em;
+  }
+
+  /* Date / eyebrow pill (Instagram navy chip) */
+  .pill-date {
+    display: inline-flex;
+    align-items: center;
+    background: var(--brand-navy);
+    color: white;
+    padding: 0.35rem 0.85rem;
+    border-radius: 0.4rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+}
+
+@keyframes petal-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50%      { transform: translate3d(0, -14px, 0) rotate(4deg); }
+}
+
+.animate-petal-float {
+  animation: petal-float 9s ease-in-out infinite;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -10px, 0); }
+}
+
+.animate-float-y {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+@keyframes grid-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 64px 64px; }
+}
+
+.animate-grid-drift {
+  animation: grid-drift 22s linear infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%      { opacity: 0.6;  transform: scale(1.08); }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+  .animate-petal-float { animation: none; }
+  .animate-float-y { animation: none; }
+  .animate-grid-drift { animation: none; }
+  .animate-glow-pulse { animation: none; }
+}

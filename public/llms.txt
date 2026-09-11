@@ -1,0 +1,11 @@
+# Glex Ed
+
+> EdTech argentina, partner oficial de Google for Education. Integra IA y cultura digital en instituciones educativas de América Latina mediante programas pedagógicos (PAIDEIA, MaestrIA, Agenda 2026, HumanIA) y plataformas (OctoClass, OctoLearn).
+
+## Pages
+
+- [Inicio](/): Propuesta, proceso, métricas, pilares, casos de éxito y colecciones MaestrIA × PAIDEIA.
+- [Soluciones](/soluciones): Programas y plataformas, trayectos MaestrIA por nivel (Inicial, Primaria, Secundaria), FAQ y solicitud de demo.
+- [Audiencias](/audiencias): Perfiles institucionales y roles a los que sirven nuestras soluciones.
+- [Campus](/campus): Acceso al campus de formación docente.
+- [Contacto](/contacto): Formulario de contacto institucional.
