@@ -9,31 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SolucionesRouteImport } from './routes/soluciones'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ContactoRouteImport } from './routes/contacto'
-import { Route as CampusRouteImport } from './routes/campus'
-import { Route as AudienciasRouteImport } from './routes/audiencias'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AudienciasRouteImport } from './routes/audiencias'
+import { Route as CampusRouteImport } from './routes/campus'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SolucionesRouteImport } from './routes/soluciones'
 
-const SolucionesRoute = SolucionesRouteImport.update({
-  id: '/soluciones',
-  path: '/soluciones',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactoRoute = ContactoRouteImport.update({
-  id: '/contacto',
-  path: '/contacto',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CampusRoute = CampusRouteImport.update({
-  id: '/campus',
-  path: '/campus',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AudienciasRoute = AudienciasRouteImport.update({
@@ -41,9 +26,24 @@ const AudienciasRoute = AudienciasRouteImport.update({
   path: '/audiencias',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const CampusRoute = CampusRouteImport.update({
+  id: '/campus',
+  path: '/campus',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolucionesRoute = SolucionesRouteImport.update({
+  id: '/soluciones',
+  path: '/soluciones',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -110,32 +110,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/soluciones': {
-      id: '/soluciones'
-      path: '/soluciones'
-      fullPath: '/soluciones'
-      preLoaderRoute: typeof SolucionesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contacto': {
-      id: '/contacto'
-      path: '/contacto'
-      fullPath: '/contacto'
-      preLoaderRoute: typeof ContactoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/campus': {
-      id: '/campus'
-      path: '/campus'
-      fullPath: '/campus'
-      preLoaderRoute: typeof CampusRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/audiencias': {
@@ -145,11 +124,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AudienciasRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/campus': {
+      id: '/campus'
+      path: '/campus'
+      fullPath: '/campus'
+      preLoaderRoute: typeof CampusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/soluciones': {
+      id: '/soluciones'
+      path: '/soluciones'
+      fullPath: '/soluciones'
+      preLoaderRoute: typeof SolucionesRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
